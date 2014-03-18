@@ -106,8 +106,10 @@ class facebook_loginActions extends sfActions
             //お客さんの場合。お客様の登録やログイン。
             if($type == 'client')
             {
+                //データをいれる。
                 $user = $this->setFacebookData($this->fb,$user);
-                var_dump($user);
+                // セッションにユーザーデータを残す。
+                $this->getUser()->login($user);
 
 
             }
@@ -131,9 +133,13 @@ class facebook_loginActions extends sfActions
     private function setFacebookData($data,$user)
     {
         //クライアントのデータをいれる。
-        $user->setName($data->me->name);
-        $user->setEmail($data->me->email);
-        $user->setMyselfText($data->me->bio);
+        if($user->getRegistered())
+        {
+            $user->setName($data->me->name);
+            $user->setEmail($data->me->email);
+            $user->setMyselfText($data->me->bio);
+        }
+
         //Facebookの基本情報
         $user->setFacebookName($data->me->name);
         $user->setFacebookId($data->me->id);
