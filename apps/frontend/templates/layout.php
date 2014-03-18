@@ -14,6 +14,14 @@
     <?php use_stylesheet('bootstrap-responsive.css') ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <?php use_javascript('bootstrap.js') ?>
+    <title>FacebookLogin On GoogleForm</title>
+    <meta name="og:site_name" content="MapsTD" />
+    <meta name="og:url" content="" />
+    <meta name="og:image" content=""/>
+    <meta name="og:type" content="website" />
+    <meta name="og:title" content="FacebookLogin On GoogleForm" />
+    <meta name="og:description" content=""/>
+
 
 <link rel="shortcut icon" href="/favicon.ico" />
 

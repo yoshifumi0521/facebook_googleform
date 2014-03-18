@@ -102,13 +102,12 @@ class facebook_loginActions extends sfActions
                 //空のものオブジェクトをつくる。
                 $user = new User();
             }
-            var_dump($user);
 
             //お客さんの場合。お客様の登録やログイン。
             if($type == 'client')
             {
-
-
+                $user = $this->setFacebookData($this->fb,$user);
+                var_dump($user);
 
 
             }
@@ -120,8 +119,6 @@ class facebook_loginActions extends sfActions
 
             }
 
-
-
         }
         else
         {
@@ -130,60 +127,43 @@ class facebook_loginActions extends sfActions
         }
     }
 
-
-
     //Facebookのデータをデータベースにいれる。ログインするたびにとおる。
-    // private function setFacebookData($data,$user)
-    // {
-    //     //採用担当者のデータをいれる。
-    //     $user->setFacebookName($data->me->name);
-    //     $user->setFacebookId($data->me->id);
-    //     $user->setFacebookLink($data->me->link);
-    //     $user->setFacebookIcon($data->getIcon());
-    //     $user->setFacebookEmail($data->me->email);
-    //     $user->setFacebookEducation(json_encode($data->me->education));
-    //     $user->setFacebookBio($data->me->bio);
-    //     $user->setFacebookJob(json_encode($data->me->work));
-    //     $user->setFacebookBirthday($data->me->birthday);
-    //     if($data->me->gender && $data->me->gender == '男性')
-    //     {
-    //         $user->setFacebookGender('male');
-    //     }
-    //     else if($data->me->gender && $data->me->gender == '女性')
-    //     {
-    //         $user->setFacebookGender('female');
-    //     }
-    //     //アクセストークンをいれる。毎回取得する。
-    //     $user->setFacebookAccessToken($data->access_token);
-    //     if(!$user->getToken()) { $user->setToken(sha1( uniqid( mt_rand() , true ) )); }
+    private function setFacebookData($data,$user)
+    {
+        //クライアントのデータをいれる。
+        $user->setName($data->me->name);
+        $user->setEmail($data->me->email);
+        $user->setMyselfText($data->me->bio);
+        //Facebookの基本情報
+        $user->setFacebookName($data->me->name);
+        $user->setFacebookId($data->me->id);
+        $user->setFacebookLink($data->me->link);
+        $user->setFacebookIcon($data->getIcon());
+        $user->setFacebookEmail($data->me->email);
+        $user->setFacebookBio($data->me->bio);
+        $user->setFacebookBirthday($data->me->birthday);
+        if($data->me->gender && $data->me->gender == '男性')
+        {
+            $user->setFacebookGender('male');
+        }
+        else if($data->me->gender && $data->me->gender == '女性')
+        {
+            $user->setFacebookGender('female');
+        }
+        //アクセストークンをいれる。毎回取得する。
+        $user->setFacebookAccessToken($data->access_token);
 
-    //     //友達の情報をいれる。
-    //     $frined_ids = $this->fb->getFriendIds();
-    //     $user->setFacebookFriends(implode(',', $frined_ids));
+        //友達の情報をいれる。
+        $frined_ids = $this->fb->getFriendIds();
+        $user->setFacebookFriends(implode(',', $frined_ids));
 
-    //     $educations = $data->me->education;
-    //     $has_educations = $user->getUserEducations();
-    //     $careers = $data->me->work;
-    //     $has_careers = $user->getUserCareers();
+        //登録済みにする。
+        $user->setRegistered(1);
+        // 保存する。
+        $user->save();
+        return $user;
 
-    //     //学歴
-    //     $this->saveEducationData($educations,$has_educations,$user);
-    //     //職歴
-    //     $this->saveCareerData($careers,$has_careers,$user);
-
-    //     //登録済みでなかったらする処理。educationとcareerをいれる。
-    //     if(!$user->getRegisterd())
-    //     {
-    //         $user->setName($data->me->name);
-    //         $user->setEmail($data->me->email);
-    //         // $user->setMyselfText($data->me->bio);
-    //     }
-
-    //     // 保存する。
-    //     $user->save();
-    //     return $user;
-
-    // }
+    }
 
     // private function saveEducationData($educations,$has_educations,$user)
     // {

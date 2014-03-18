@@ -26,6 +26,11 @@ propel:
     facebook_email:
       type: VARCHAR
       size: 100
+    facebook_link:
+      type: LONGVARCHAR
+    facebook_birthday:
+      type: VARCHAR
+      size: 50
     facebook_gender:
       type: VARCHAR
       size: 10
