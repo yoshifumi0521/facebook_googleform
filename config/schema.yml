@@ -1,0 +1,106 @@
+---
+propel:
+  _attributes:
+    package: lib.model
+  user:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    name:
+      type: VARCHAR
+      size: 100
+    email:
+      type: VARCHAR
+      size: 100
+    myself_text:
+      type: LONGVARCHAR
+    facebook_id:
+      type: INTEGER
+    facebook_name:
+      type: VARCHAR
+      size: 100
+    facebook_email:
+      type: VARCHAR
+      size: 100
+    facebook_gender:
+      type: VARCHAR
+      size: 10
+    facebook_icon:
+      type: VARCHAR
+      size: 255
+    facebook_bio:
+      type: LONGVARCHAR
+    facebook_friends:
+      type: LONGVARCHAR
+    facebook_access_token:
+      type: LONGVARCHAR
+    form_count:
+      type: INTEGER
+    registered:
+      type: INTEGER
+    admin:
+      type: INTEGER
+    referer_url:
+      type: VARCHAR
+      size: 255
+    utm_campaign:
+      type: VARCHAR
+      size: 50
+    utm_source:
+      type: VARCHAR
+      size: 50
+    mail_flag:
+      type: INTEGER
+      default: 1
+    display:
+      type: INTEGER
+      default: 1
+    created_at:
+      type: TIMESTAMP
+    updated_at:
+      type: TIMESTAMP
+  form:
+    _attributes:
+      idMethod: native
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+    user_id:
+      type: INTEGER
+      required: true
+      foreignTable: user
+      foreignReference: id
+      onDelete: RESTRICT
+      onUpdate: RESTRICT
+    title:
+      type: VARCHAR
+      size: 255
+    summary:
+      type: LONGVARCHAR
+    form_type:
+      type: INTEGER
+    form_value:
+      type: LONGVARCHAR
+    type1_token:
+      type: VARCHAR
+      size: 255
+    type2_token:
+      type: VARCHAR
+      size: 255
+    status:
+      type: INTEGER
+    access_count:
+      type: INTEGER
+    display:
+      type: INTEGER
+      default: 1
+    created_at:
+      type: TIMESTAMP
+    updated_at:
+      type: TIMESTAMP

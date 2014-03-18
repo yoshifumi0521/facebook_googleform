@@ -1,0 +1,10 @@
+
+#レイアウト
+default:
+  has_layout: false
+  # layout:     top
+
+# javascripts: []
+
+# stylesheets: []
+

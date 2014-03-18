@@ -1,4 +1,7 @@
 
+login:
+  url: /login/:type/*
+  param: { module: facebook_login, action: login }
 
 
 # default rules
