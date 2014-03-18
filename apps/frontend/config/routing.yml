@@ -1,7 +1,10 @@
+
+
+
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: top, action: index }
 
 default_symfony:
   url:   /symfony/:action/*
